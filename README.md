@@ -1,6 +1,12 @@
 ![GITHUB-BADGE](https://github.com/cmangla/AirSane-openwrt/actions/workflows/build.yml/badge.svg)
 # AirSane for OpenWRT
 This repository contains OpenWRT package for the AirSane project at https://github.com/SimulPiscator/AirSane
+
+## Packages
+Some OpenWRT packages are attached to [releases](https://github.com/cmangla/AirSane-openwrt/releases).
+If you'd like more architectures or OpenWRT versions included in those, please raise a PR that add them
+to `.github/workflows/build.yml`.
+
 ## Usage
 ### Build
 Build the package for yourself using the OpenWRT SDK. The easiest way is to use the Docker image from\
