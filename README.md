@@ -4,7 +4,7 @@ This repository contains OpenWRT package for the AirSane project at https://gith
 
 ## Packages
 Some OpenWRT packages are attached to [releases](https://github.com/cmangla/AirSane-openwrt/releases).
-If you'd like more architectures or OpenWRT versions included in those, please raise a PR that add them
+If you'd like more architectures or OpenWRT versions included in those, please raise a PR that adds them
 to `.github/workflows/build.yml`.
 
 ## Usage
