@@ -1,9 +1,10 @@
-name: release
+name: Make release when tag is created
 
 on:
   push:
     tags:
-      - "v*.*.*"
+      - v*
+
 jobs:
   build_all:
     uses: ./.github/workflows/build.yml
@@ -22,7 +23,7 @@ jobs:
             pkf=$(find "$pk" -name '*.ipk' -type f | tail -n1)
             cp -v "$pkf" "release-packages/${pk}"
           done
-      - uses: softprops/action-gh-release@v1
+      - name: Create new release from tag
+        uses: softprops/action-gh-release@v1
         with:
           files: release-packages/*.ipk
-
