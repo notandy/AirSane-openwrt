@@ -70,7 +70,8 @@ This is a fork of the original implementation by
 [polikasov](https://github.com/polikasov/AirSane-openwrt),
 with changes by
 [nevian427](https://github.com/nevian427/AirSane-openwrt),
-[ypopovych](https://github.com/ypopovych/AirSane-openwrt)
-and
+[ypopovych](https://github.com/ypopovych/AirSane-openwrt),
 [shawnking07](https://github.com/shawnking07/AirSane-openwrt)
+and
+[alryaz](https://github.com/alryaz)
 merged in.
