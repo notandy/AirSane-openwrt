@@ -167,9 +167,8 @@ jobs:
       - uses: actions/download-artifact@v4
       - run: |
           mkdir release-packages
-          find . -type d -name '*.ipk' | while IFS= read -r pk; do
-            pkf=$(find "$pk" -name '*.ipk' -type f | tail -n1)
-            cp -v "$pkf" "release-packages/${pk}"
+          find . -type d -name '*.ipk.d' | while IFS= read -r pkd; do
+            cp -v $(find "$pkd" -name '*.ipk' -type f) release-packages/
           done
       - name: Create new release from tag
         uses: softprops/action-gh-release@v1
