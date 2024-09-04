@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Airsaned package for OpenWRT
-        uses: openwrt/gh-action-sdk@main
+        uses: cmangla/gh-action-sdk@pr-hash-fixup-option
         env:
           ARCH: ${{ matrix.sdk }}-${{ matrix.wrtrel }}
           EXTRA_FEEDS: src-git|airsaned|${{ github.server_url }}/${{ github.repository }}.git^${{ github.sha }}
