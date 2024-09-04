@@ -38,7 +38,7 @@ jobs:
           EXTRA_FEEDS: src-git|airsaned|${{ github.server_url }}/${{ github.repository }}.git^${{ github.sha }}
           PACKAGES: airsaned
           FIXUP: 1
-          V: sc
+          V: s
 
       - name: Obtain full package version
         run: bash ./.github/work.sh pkg-ver airsaned/Makefile | tee $GITHUB_ENV
