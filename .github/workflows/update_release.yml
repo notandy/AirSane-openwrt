@@ -168,7 +168,7 @@ jobs:
       - run: |
           mkdir release-packages
           find . -type d -name '*.ipk.d' | while IFS= read -r pkd; do
-            cp -v $(find "$pkd" -name '*.ipk' -type f) release-packages/
+            cp -v $(find "$pkd" -name '*.ipk' -type f) release-packages/${pkd%.d}
           done
       - name: Create new release from tag
         uses: softprops/action-gh-release@v1
