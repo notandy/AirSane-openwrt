@@ -85,7 +85,7 @@ jobs:
           sed -i "s/^PKG_VERSION:=.*/PKG_VERSION:=${tag#v}/" airsaned/Makefile
           sed -i "s/^PKG_SOURCE_VERSION:=.*/PKG_SOURCE_VERSION:=${commit_hash}/" airsaned/Makefile
           sed -i "s/^PKG_SOURCE_DATE:=.*/PKG_SOURCE_DATE:=${release_date}/" airsaned/Makefile
-          sed -i "s/^PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=skip" airsaned/Makefile
+          sed -i "s/^PKG_MIRROR_HASH:=.*/PKG_MIRROR_HASH:=skip/" airsaned/Makefile
           echo "::endgroup::"
 
       - name: Check for changes
