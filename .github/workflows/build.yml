@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         wrtrel: ['22.03.2', '23.05.0', '23.05.2']
-        sdk: ['ramips-mt76x8', 'bcm27xx-bcm2708', 'ar71xx-ath79', 'ipq40xx-generic', 'x86-64', 'x86-generic']
+        sdk: ['ramips-mt76x8', 'bcm27xx-bcm2708', 'ath79-generic', 'ath79-nand', 'ath79-tiny', 'ipq40xx-generic', 'x86-64', 'x86-generic']
 
     runs-on: ubuntu-latest
     continue-on-error: true
