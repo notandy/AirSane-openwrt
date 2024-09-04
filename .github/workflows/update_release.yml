@@ -174,7 +174,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ needs.check_release_exists.outputs.tag }}
-          release_name: ${{ needs.check_release_exists.outputs.release_title }}
+          name: ${{ needs.check_release_exists.outputs.release_title }}
           draft: false
           prerelease: false
           body: |
