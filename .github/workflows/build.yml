@@ -37,7 +37,7 @@ jobs:
           ARCH: ${{ matrix.sdk }}-${{ matrix.wrtrel }}
           EXTRA_FEEDS: src-git|airsaned|${{ github.server_url }}/${{ github.repository }}.git^${{ github.sha }}
           PACKAGES: airsaned
-          FIXUP: 0
+          FIXUP: 1
           V: w # s=(stdout+stderr), w=warnings, c=commands
 
       - name: Obtain full package version
