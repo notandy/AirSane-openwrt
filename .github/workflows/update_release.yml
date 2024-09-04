@@ -178,6 +178,6 @@ jobs:
           draft: false
           prerelease: false
           body: |
-            Update AirSane to version ${{ needs.check_release_exists.outputs.tag }}. Released on ${{ needs.check_release_exists.outputs.release_date }}.
+            Update AirSane to version ${{ needs.check_release_exists.outputs.tag }}, released on ${{ needs.check_release_exists.outputs.release_date }}.
             [View source release here](${{ needs.check_release_exists.outputs.release_url }}).
           files: release-packages/*.ipk
