@@ -9,7 +9,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        wrtrel: ['22.03.2', '23.05.0', '23.05.2']
+        wrtrel: ['23.05.2', '23.05.3', '23.05.4']
         sdk:
           - ramips-mt76x8
           - bcm27xx-bcm2708
