@@ -3,6 +3,9 @@ name: Update AirSane Release
 on:
   workflow_dispatch: # Allows manual trigger
 
+  schedule:
+    - cron: "0 3 * * 5" # 3 AM UTC every Friday
+
 jobs:
   check_release_exists:
     name: Check whether upstream has any changes
