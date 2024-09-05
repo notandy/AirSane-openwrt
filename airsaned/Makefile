@@ -26,7 +26,7 @@ define Package/airsaned
   URL:=https://github.com/SimulPiscator/AirSane
   SECTION:=utils
   CATEGORY:=Utilities
-  DEPENDS:=+libsane +libjpeg +libpng +libavahi-client +libusb-1.0 +libstdcpp
+  DEPENDS:=+libsane +libjpeg +libpng +libavahi-client +libusb-1.0 +libstdcpp +libatomic
 endef
 
 define Package/airsaned/description
