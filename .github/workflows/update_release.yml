@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout current repository
         uses: actions/checkout@v4
+        with:
+          tags: true
 
       - name: Fetch latest release from AirSane
         id: fetch_release
