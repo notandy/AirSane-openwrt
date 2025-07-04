@@ -10,23 +10,9 @@ jobs:
       fail-fast: false
       matrix:
         wrtrel:
-          - 22.03.7
-          - 23.05.2
-          - 23.05.3
-          - 23.05.4
+          - 24.10.2
         sdk:
-          - ramips-mt76x8
-          - bcm27xx-bcm2708
-          - ath79-generic
-          - ath79-nand
-          - ath79-tiny
-          - ipq40xx-generic
-          - x86-64
-          - x86-generic
-          - ipq806x-generic
-          - mediatek-mt7622
-          - mvebu-cortexa9
-          - bcm53xx-generic
+          - mediatek-filogic
 
     runs-on: ubuntu-latest
     continue-on-error: true
