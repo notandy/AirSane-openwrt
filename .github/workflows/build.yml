@@ -12,6 +12,7 @@ jobs:
         wrtrel:
           - 24.10.2
           - 24.10.3
+          - 24.10.4
         sdk:
           - mediatek-filogic
 
