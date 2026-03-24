@@ -18,7 +18,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/download-artifact@v4.1.7
+      - uses: actions/download-artifact@v8
       - run: |
           mkdir release-packages
           find . -type d -name '*.apk.d' | while IFS= read -r pkd; do

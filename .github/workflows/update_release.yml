@@ -48,7 +48,7 @@ jobs:
           echo "commit_hash=${commit_hash}" | tee -a $GITHUB_OUTPUT
 
       - name: Checkout current repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -71,7 +71,7 @@ jobs:
     if: needs.check_release_exists.outputs.release_exists != 'true'
     steps:
       - name: Checkout current repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Update Makefile with new release information
         id: update_makefile
@@ -125,14 +125,14 @@ jobs:
     needs: [check_release_exists, build_all]
     if: needs.check_release_exists.outputs.release_exists == 'false'
     steps:
-      - uses: actions/download-artifact@v4.1.7
+      - uses: actions/download-artifact@v8
       - run: |
           mkdir release-packages
           find . -type d -name '*.apk.d' | while IFS= read -r pkd; do
             cp -v $(find "$pkd" -name '*.apk' -type f) release-packages/${pkd%.d}
           done
       - name: Create new release from tag
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.check_release_exists.outputs.tag }}
           name: ${{ needs.check_release_exists.outputs.release_title }}
