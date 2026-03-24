@@ -10,7 +10,6 @@ jobs:
       fail-fast: false
       matrix:
         wrtrel:
-          - 24.10.4
           - 25.12.1
         sdk:
           - mediatek-filogic
@@ -37,6 +36,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: airsaned_${{ env.PKG_FULL_VERSION }}_openwrt-${{ matrix.wrtrel }}_${{ matrix.sdk }}.ipk.d
-          path: bin/packages/**/airsaned_*.ipk
+          name: airsaned_${{ env.PKG_FULL_VERSION }}_openwrt-${{ matrix.wrtrel }}_${{ matrix.sdk }}.apk.d
+          path: bin/packages/**/airsaned_*.apk
 

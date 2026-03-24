@@ -128,8 +128,8 @@ jobs:
       - uses: actions/download-artifact@v4.1.7
       - run: |
           mkdir release-packages
-          find . -type d -name '*.ipk.d' | while IFS= read -r pkd; do
-            cp -v $(find "$pkd" -name '*.ipk' -type f) release-packages/${pkd%.d}
+          find . -type d -name '*.apk.d' | while IFS= read -r pkd; do
+            cp -v $(find "$pkd" -name '*.apk' -type f) release-packages/${pkd%.d}
           done
       - name: Create new release from tag
         uses: softprops/action-gh-release@v1
@@ -141,4 +141,4 @@ jobs:
           body: |
             Update AirSane to version ${{ needs.check_release_exists.outputs.tag }}, released on ${{ needs.check_release_exists.outputs.release_date }}.
             [View source release here](${{ needs.check_release_exists.outputs.release_url }}).
-          files: release-packages/*.ipk
+          files: release-packages/*.apk
