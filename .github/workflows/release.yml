@@ -21,33 +21,35 @@ jobs:
       - uses: actions/download-artifact@v8
       - name: Debug - Check artifact directories
         run: |
-          echo "Artifact directories found:"
-          find . -type d -name '*.apk.d' || echo "None found"
-          echo "Full directory listing:"
-          ls -la
+          echo "Current working directory: $(pwd)"
+          echo "Directory contents:"
+          find . -maxdepth 2 -type f -o -type d | sort
+          echo ""
+          echo "Looking for .apk.d directories:"
+          find . -name '*.apk.d' -type d
       - run: |
-          mkdir release-packages
+          mkdir -p release-packages
           echo "::group::Extracting packages from artifacts"
-          artifact_count=0
-          find . -type d -name '*.apk.d' | while IFS= read -r pkd; do
-            artifact_count=$((artifact_count + 1))
-            cp -v $(find "$pkd" -name '*.apk' -type f) release-packages/${pkd%.d}
+          
+          # Find all .apk files in artifact directories and copy them
+          found_packages=0
+          find . -name '*.apk' -type f | while read -r apk_file; do
+            found_packages=$((found_packages + 1))
+            echo "Found package: $apk_file"
+            cp -v "$apk_file" release-packages/
           done
           
-          if [ $artifact_count -eq 0 ]; then
-            echo "WARNING: No artifact directories found"
-          fi
-          echo "::endgroup::"
-          
-          if ! find release-packages -name '*.apk' -type f | grep -q .; then
+          # Also check if anything was copied
+          if [ ! -d release-packages ] || [ -z "$(ls -A release-packages/)" ]; then
             echo "ERROR: No packages found in release-packages directory"
-            echo "Directory contents:"
-            ls -la release-packages/ || echo "Directory doesn't exist or is empty"
+            echo "Searching for any .apk files in workspace:"
+            find . -name '*.apk' -type f || echo "No .apk files found anywhere"
             exit 1
           fi
           
+          echo "::endgroup::"
           echo "::group::Release packages"
-          find release-packages -name '*.apk' -type f -exec ls -lh {} \;
+          ls -lh release-packages/
           echo "::endgroup::"
       - name: Create new release from tag
         uses: softprops/action-gh-release@v2
