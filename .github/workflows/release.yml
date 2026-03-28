@@ -27,13 +27,13 @@ jobs:
           done
           echo "::endgroup::"
           
-          if [ ! -f release-packages/*.apk ]; then
+          if ! find release-packages -name '*.apk' -type f | grep -q .; then
             echo "ERROR: No packages found to release"
             exit 1
           fi
           
           echo "::group::Release packages"
-          ls -lh release-packages/
+          find release-packages -name '*.apk' -type f -exec ls -lh {} \;
           echo "::endgroup::"
       - name: Create new release from tag
         uses: softprops/action-gh-release@v2
