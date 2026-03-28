@@ -37,7 +37,7 @@ jobs:
             exit 1
           fi
           echo "✓ Package built successfully"
-          ls -lh bin/packages/**/airsaned*.apk
+          find bin/packages -name 'airsaned*.apk' -type f -exec ls -lh {} \;
 
       - name: Obtain full package version
         run: bash ./.github/work.sh pkg-ver airsaned/Makefile | tee $GITHUB_ENV
