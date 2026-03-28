@@ -47,8 +47,7 @@ jobs:
           commit_hash=$(curl -sL "https://api.github.com/repos/SimulPiscator/AirSane/tags" | jq -r --arg TAG "$tag" '.[] | select(.name == $TAG) | .commit.sha')
           echo "commit_hash=${commit_hash}" | tee -a $GITHUB_OUTPUT
 
-      - name: Checkout current repository
-        uses: actions/checkout@v6
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
@@ -98,6 +97,9 @@ jobs:
             echo "changes=false" | tee -a $GITHUB_OUTPUT
           else
             echo "changes=true" | tee -a $GITHUB_OUTPUT
+            echo "::group::Changes made"
+            git diff --stat
+            echo "::endgroup::"
           fi
 
       - name: Commit changes
@@ -106,6 +108,17 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git commit -a -m "feat: update AirSane source reference to ${{ needs.check_release_exists.outputs.tag }}"
+          
+      - name: Verify Makefile was updated correctly
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          echo "::group::Verify Makefile updates"
+          grep "PKG_VERSION:=${tag#v}" airsaned/Makefile || (echo "PKG_VERSION not updated correctly" && exit 1)
+          grep "PKG_SOURCE_VERSION:=${{ needs.check_release_exists.outputs.commit_hash }}" airsaned/Makefile || (echo "PKG_SOURCE_VERSION not updated" && exit 1)
+          echo "✓ Makefile verified successfully"
+          echo "::endgroup::"
+        env:
+          tag: ${{ needs.check_release_exists.outputs.tag }}
 
       - name: Push changes
         if: steps.check_changes.outputs.changes == 'true'
@@ -128,9 +141,20 @@ jobs:
       - uses: actions/download-artifact@v8
       - run: |
           mkdir release-packages
+          echo "::group::Extracting packages from artifacts"
           find . -type d -name '*.apk.d' | while IFS= read -r pkd; do
             cp -v $(find "$pkd" -name '*.apk' -type f) release-packages/${pkd%.d}
           done
+          echo "::endgroup::"
+          
+          if [ ! -f release-packages/*.apk ]; then
+            echo "ERROR: No packages found to release"
+            exit 1
+          fi
+          
+          echo "::group::Release packages"
+          ls -lh release-packages/
+          echo "::endgroup::"
       - name: Create new release from tag
         uses: softprops/action-gh-release@v2
         with:

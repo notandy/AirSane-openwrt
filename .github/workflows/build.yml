@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         wrtrel:
-          - 25.12.1
+          - 25.12.2
         sdk:
           - mediatek-filogic
 
@@ -30,6 +30,15 @@ jobs:
           FIXUP: 1
           V: w # s=(stdout+stderr), w=warnings, c=commands
 
+      - name: Verify package was built
+        run: |
+          if ! find bin/packages -name 'airsaned*.apk' -type f | grep -q .; then
+            echo "ERROR: No airsaned package found in bin/packages"
+            exit 1
+          fi
+          echo "✓ Package built successfully"
+          ls -lh bin/packages/**/airsaned*.apk
+
       - name: Obtain full package version
         run: bash ./.github/work.sh pkg-ver airsaned/Makefile | tee $GITHUB_ENV
         shell: bash
@@ -38,4 +47,6 @@ jobs:
         with:
           name: airsaned_${{ env.PKG_FULL_VERSION }}_openwrt-${{ matrix.wrtrel }}_${{ matrix.sdk }}.apk.d
           path: bin/packages/**/airsaned*.apk
+          retention-days: 7
+          if-no-files-found: error
 

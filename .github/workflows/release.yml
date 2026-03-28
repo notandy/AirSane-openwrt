@@ -21,10 +21,21 @@ jobs:
       - uses: actions/download-artifact@v8
       - run: |
           mkdir release-packages
+          echo "::group::Extracting packages from artifacts"
           find . -type d -name '*.apk.d' | while IFS= read -r pkd; do
             cp -v $(find "$pkd" -name '*.apk' -type f) release-packages/${pkd%.d}
           done
+          echo "::endgroup::"
+          
+          if [ ! -f release-packages/*.apk ]; then
+            echo "ERROR: No packages found to release"
+            exit 1
+          fi
+          
+          echo "::group::Release packages"
+          ls -lh release-packages/
+          echo "::endgroup::"
       - name: Create new release from tag
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: release-packages/*.apk
