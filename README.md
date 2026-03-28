@@ -1,16 +1,16 @@
-![GITHUB-BADGE](https://github.com/cmangla/AirSane-openwrt/actions/workflows/build.yml/badge.svg)
+![GITHUB-BADGE](https://github.com/notandy/AirSane-openwrt/actions/workflows/build.yml/badge.svg)
 # AirSane for OpenWRT
 The OpenWRT package for [AirSane](https://github.com/SimulPiscator/AirSane)
 
 ## Packages
-Some OpenWRT packages are attached to [releases](https://github.com/cmangla/AirSane-openwrt/releases).
+Some OpenWRT packages are attached to [releases](https://github.com/notandy/AirSane-openwrt/releases).
 If you'd like more architectures or OpenWRT versions included in those, please raise a PR that adds them
 to `.github/workflows/build.yml`.
 
 ## Usage
 
 ### Pre-built Packages
-Pre-built `.apk` packages are available in [GitHub Releases](https://github.com/cmangla/AirSane-openwrt/releases). Currently built for:
+Pre-built `.apk` packages are available in [GitHub Releases](https://github.com/notandy/AirSane-openwrt/releases). Currently built for:
 - **OpenWrt 25.12.2** with mediatek-filogic target (uses `.apk` package format)
 
 To request packages for additional OpenWRT versions or architectures, please open an issue or submit a PR to add them to `.github/workflows/build.yml`.
@@ -28,7 +28,7 @@ The continuous integration in this repository also builds packages as artifacts 
 ### Prepare
 Inside the SDK container, add the AirSane repository to your feeds:
 ```bash
-echo "src-git airsaned https://github.com/cmangla/AirSane-openwrt.git" >> feeds.conf.default
+echo "src-git airsaned https://github.com/notandy/AirSane-openwrt.git" >> feeds.conf.default
 ```
 
 Update and install the feed:
