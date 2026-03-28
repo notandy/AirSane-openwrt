@@ -139,16 +139,30 @@ jobs:
     if: needs.check_release_exists.outputs.release_exists == 'false'
     steps:
       - uses: actions/download-artifact@v8
+      - name: Debug - Check artifact directories
+        run: |
+          echo "Artifact directories found:"
+          find . -type d -name '*.apk.d' || echo "None found"
+          echo "Full directory listing:"
+          ls -la
       - run: |
           mkdir release-packages
           echo "::group::Extracting packages from artifacts"
+          artifact_count=0
           find . -type d -name '*.apk.d' | while IFS= read -r pkd; do
+            artifact_count=$((artifact_count + 1))
             cp -v $(find "$pkd" -name '*.apk' -type f) release-packages/${pkd%.d}
           done
+          
+          if [ $artifact_count -eq 0 ]; then
+            echo "WARNING: No artifact directories found"
+          fi
           echo "::endgroup::"
           
           if ! find release-packages -name '*.apk' -type f | grep -q .; then
-            echo "ERROR: No packages found to release"
+            echo "ERROR: No packages found in release-packages directory"
+            echo "Directory contents:"
+            ls -la release-packages/ || echo "Directory doesn't exist or is empty"
             exit 1
           fi
           
