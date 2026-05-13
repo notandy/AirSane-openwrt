@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         wrtrel:
-          - 25.12.2
+          - 25.12.3
         sdk:
           - mediatek-filogic
 
