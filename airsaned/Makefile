@@ -7,7 +7,7 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/SimulPiscator/AirSane.git
 PKG_SOURCE_VERSION:=1b43fd7f660d8371344383721cec8edac0b22659
 PKG_SOURCE_DATE:=2026-04-11
-PKG_VERSION:=.0.4.10
+PKG_VERSION:=0.4.10
 PKG_MIRROR_HASH:=skip
 
 PKG_MAINTAINER:=SimulPiscator <example@example.com>
